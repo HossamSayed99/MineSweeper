@@ -275,6 +275,20 @@ class MinesweeperAI():
                 break
             if s not in self.knowledge:
                 self.knowledge.append(s)
+
+
+        for sentence in self.knowledge:
+            # Getting all safe cells in a statment and marking as safe
+            safecells = copy.deepcopy(sentence.known_safes())
+            if safecells != None:
+                for safecell in safecells:
+                    self.mark_safe(safecell)
+
+            badcells = copy.deepcopy(sentence.known_mines())
+            if badcells != None:
+                for badcell in badcells:
+                    self.mark_mine(badcell)
+
         return 
 
     def make_safe_move(self):
